@@ -3,12 +3,14 @@ package com.cevysays.androidbeginercourse;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 // Activity
 // ActionBarActivity -> secara default sudah memiliki actionbar
@@ -17,14 +19,13 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
 
-
     // method itu adalah fungsi
     // fungsi ada yang mengembalikan nilai dan ada yang tidak mengembalikan nilai
 
     Button btnCall;
     EditText inputPhoneNumber;
     TextView textPhone;
-
+    TextView resultPhone;
 
 
     @Override
@@ -37,16 +38,33 @@ public class MainActivity extends AppCompatActivity {
         btnCall = (Button) findViewById(R.id.call);
         inputPhoneNumber = (EditText) findViewById(R.id.inputPhoneNumber);
         textPhone = (TextView) findViewById(R.id.textPhone);
+        resultPhone = (TextView) findViewById(R.id.textPhone);
 
         // event Listener
         btnCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                if (TextUtils.isEmpty(inputPhoneNumber.getText().toString())) {
+
+                    //if numbernya kosong
+                    Toast.makeText(MainActivity.this, "Phone number field require", Toast.LENGTH_SHORT).show();
+                }else if(inputPhoneNumber.getText().toString().equals("147")){
+
+                    Toast.makeText(MainActivity.this, "Laporan Speedy Rusak", Toast.LENGTH_SHORT).show();
+                }else {
+                    // untuk mengambil phone number yang berada di editText
+                    String phoneNumber = inputPhoneNumber.getText().toString();
+
+                    // set phone number to textView
+                    resultPhone.setText(phoneNumber);
+                }
+
+
+
 
             }
         });
-
 
 
     }
